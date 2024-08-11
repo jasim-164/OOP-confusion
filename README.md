@@ -83,3 +83,48 @@ destructor is called 1 10
 destructor is called 1 10
 destructor is called 1 0
 ```
+# Problem-4: friend function
+A friend function in C++ is a function that is not a member of a class but has access to the class's private and protected members. This function is declared with the friend keyword inside the class whose members it needs to access.
+
+Key Characteristics of Friend Functions:
+Access to Private and Protected Members: A friend function can access private and protected data members of the class it is declared as a friend of, which regular non-member functions cannot do.
+
+Not a Member Function: Even though a friend function has access to private and protected members, it is not considered a member of the class. This means it is not called using an object of the class and does not have a this pointer.
+
+Declared Inside the Class: The friend function is declared inside the class using the friend keyword. However, the definition (implementation) of the function can be outside the class.
+
+When to Use a Friend Function:
+When you need to perform operations that involve private data members of two or more classes.
+When you need a function to access private members but do not want it to be a member of the class.
+
+```
+#include <iostream>
+using namespace std;
+
+class MyClass {
+private:
+    int x;
+    int y;
+
+public:
+    MyClass(int a, int b) : x(a), y(b) {}
+
+    // Friend function declaration
+    friend int sum(MyClass obj);
+};
+
+// Friend function definition
+int sum(MyClass obj) {
+    return obj.x + obj.y; // Access private members x and y
+}
+
+int main() {
+    MyClass obj(10, 20);
+
+    // Call the friend function
+    cout << "Sum: " << sum(obj) << endl;
+
+    return 0;
+}
+
+```
